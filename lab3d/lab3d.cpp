@@ -155,7 +155,7 @@ int main()
 {
     bool running = true;
     sf::ContextSettings context(24, 0, 0, 4, 5);
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Open GL Lab3 00", 7u, context);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Grafika 3D - Projekt - Olga Kubiszyn", 7u, context);
     sf::Clock deltaClock;
 
     ImGui::SFML::Init(window);
@@ -165,6 +165,7 @@ int main()
     reshapeScreen(window.getSize());
     initOpenGL();
 
+    bool game = true;
     while (running)
     {
         sfe event;
@@ -179,7 +180,7 @@ int main()
 
         //ImGui::SFML::Update(window, deltaClock.restart());
 
-        glDisable(GL_LIGHTING);
+        /*glDisable(GL_LIGHTING);
 
         glBegin(GL_LINES);
 
@@ -198,7 +199,7 @@ int main()
         drawLine(0.0, 1.0, 0.0, 0, 0, 0, 0, -1, 0);
         drawLine(0.0, 0.0, 1.0, 0, 0, 0, 0, 0, -1);
         glEnd();
-        glPopAttrib();
+        glPopAttrib();*/
 
         /*double Points[12][6] = { {-0.5, 0.5, -0.5, 0.5, 0.5, -0.5 },
         {-0.5, -0.5, -0.5, 0.5, -0.5, -0.5},
@@ -229,7 +230,7 @@ int main()
 
         //drawTriangle();
 
-        glEnable(GL_LIGHTING);
+        //glEnable(GL_LIGHTING);
 
         /*GLUquadricObj* qobj = gluNewQuadric();
         gluQuadricDrawStyle(qobj, GLU_FILL);
@@ -278,7 +279,7 @@ int main()
         //glVertex3f(-0.5, 0, 0.5);
         //glVertex3f(-0.5, 0, -0.5);*/
 
-        sf::Vector3f u, v, res[4], flag[20][20], flag_n[20][20];
+        /*sf::Vector3f u, v, res[4], flag[20][20], flag_n[20][20];
 
         for (int x = 0; x < 20; x++)
             for (int y = 0; y < 20; y++)
@@ -307,7 +308,7 @@ int main()
                 res[3] = cross_product(u, v);
 
                 flag_n[x][y] = (res[0] + res[1] + res[2] + res[3]);
-            }
+            }*/
 
         //glColor3f(1.0f, 1.0f, 0.0f);
 
@@ -380,171 +381,206 @@ int main()
         //glColor4f(0.0, 0.0, 0.0, 0.5); glVertex3f(-0.5, -0.5, 1.0);
         //glEnd();
         //glDisable(GL_BLEND);
-
-        glRotatef(rot.x, 1, 0, 0);
-        glRotatef(rot.y, 0, 1, 0);
-        glRotatef(rot.z, 0, 0, 1);
-
-        glColor3f(1.0, 0.0, 1.0);
-        glBegin(GL_QUADS);
-        glVertex3f(1, 0, 1);
-        glVertex3f(1, 0, -1);
-        glVertex3f(-1, 0, -1);
-        glVertex3f(-1, 0, 1);
-        glEnd();
-
-        std::vector<std::vector<char>> board = {
-            { 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x'},
-            { 'x', ' ', ' ', ' ', 'x', 'x', ' ', 'x'},
-            { 'x', ' ', 'x', 'x', ' ', ' ', ' ', 'x'},
-            { 'x', ' ', ' ', ' ', 'x', ' ', 'x', 'x'},
-            { 'x', ' ', 'x', ' ', ' ', ' ', 'x', 'x'},
-            { 'x', ' ', ' ', 'x', ' ', 'x', 'x', 'x'},
-            { 'x', 'x', ' ', 'x', ' ', ' ', 'o', 'x'},
-            { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'}
-        };
-
-        /*std::vector<std::vector<int> > board1000(1000, std::vector<int>(1000));
-        for (int i = 0; i < 1000; i++)
+        if (game)
         {
-            for (int j = 0; j < 1000; j++)
-            {
-                if (board[i/125][j/125] == 'x')
-                    board1000
-            }
-        }*/
+            glRotatef(rot.x, 1, 0, 0);
+            glRotatef(rot.y, 0, 1, 0);
+            glRotatef(rot.z, 0, 0, 1);
+
+            //glDisable(GL_COLOR_MATERIAL);
+            //ta tekstura sprawia ze jest strasznie wolno!!!
+            /*sf::Texture TEXid;
+            TEXid.loadFromFile("water.jpg");
+            TEXid.generateMipmap();
+            glEnable(GL_TEXTURE_2D);
+            sf::Texture::bind(&TEXid);*/
+
+            glColor3f(1.0, 0.0, 1.0);
+            glBegin(GL_QUADS);
+            glVertex3f(1, 0, 1);
+            glVertex3f(1, 0, -1);
+            glVertex3f(-1, 0, -1);
+            glVertex3f(-1, 0, 1);
+            glEnd();
+
+            //glDisable(GL_TEXTURE_2D);
+
+            std::vector<std::vector<char>> board = {
+                { 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x'},
+                { 'x', ' ', ' ', ' ', 'x', 'x', ' ', 'x'},
+                { 'x', ' ', 'x', 'x', ' ', ' ', ' ', 'x'},
+                { 'x', ' ', ' ', ' ', 'x', ' ', 'x', 'x'},
+                { 'x', ' ', 'x', ' ', ' ', ' ', 'x', 'x'},
+                { 'x', ' ', ' ', 'x', ' ', 'x', 'x', 'x'},
+                { 'x', 'x', ' ', 'x', ' ', ' ', 'o', 'x'},
+                { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'}
+            };
         
-        double x = -1; double z = -1;
-        /*glBegin(GL_QUADS);
-        glVertex3f(-1, 0.01, -1);
-        glVertex3f(-1 + 0.25, 0.01, - 1);
-        glVertex3f(-1 + 0.25, 0.01, -1 + 0.25);
-        glVertex3f(-1, 0.01, -1 + 0.25);
-        glEnd();*/
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
+            double x = -1; double z = -1;
+        
+            for (int i = 0; i < 8; i++)
             {
-                if (board[i][j] == 'x')
+                for (int j = 0; j < 8; j++)
                 {
-                    glColor3f(1.0, 0.271, 0.0);
-                    glBegin(GL_QUADS);
-
-                    /*glVertex3f(x, 0.01, z);
-                    glVertex3f(x + 0.25, 0.01, z);
-                    glVertex3f(x + 0.25, 0.01, z + 0.25);
-                    glVertex3f(x, 0.01, z + 0.25);*/
-
-                    glVertex3f(x, 0.25, z);
-                    glVertex3f(x + 0.25, 0.25, z);
-                    glVertex3f(x + 0.25, 0.25, z + 0.25);
-                    glVertex3f(x, 0.25, z + 0.25);
-
-                    glColor3f(0.0, 1.0, 0.0);
-
-                    glVertex3f(x, 0.01, z);
-                    glVertex3f(x + 0.25, 0.01, z);
-                    glVertex3f(x + 0.25, 0.25, z);
-                    glVertex3f(x, 0.25, z);
-
-                    glVertex3f(x + 0.25, 0.01, z);
-                    glVertex3f(x + 0.25, 0.01, z + 0.25);
-                    glVertex3f(x + 0.25, 0.25, z + 0.25);
-                    glVertex3f(x + 0.25, 0.25, z);
-
-                    glVertex3f(x + 0.25, 0.01, z + 0.25);
-                    glVertex3f(x, 0.01, z + 0.25);
-                    glVertex3f(x, 0.25, z + 0.25);
-                    glVertex3f(x + 0.25, 0.25, z + 0.25);
-
-                    glVertex3f(x, 0.01, z + 0.25);
-                    glVertex3f(x, 0.01, z);
-                    glVertex3f(x, 0.25, z);
-                    glVertex3f(x, 0.25, z + 0.25);
-
-                    glEnd();
-                }
-                else if (board[i][j] == 'o')
-                {
-                    //std::cout << rot.x << " " << rot.z << std::endl;
-                    std::cout << (ball_pos.x - 0.002 - ball_r + 1) * 4 << std::endl;//8
-                    if (rot.z > 0) 
-                    { 
-                        if (board[getBoardIndex(ball_pos.z)][getBoardIndex(ball_pos.x, -0.002, -1)] != 'x')
-                            ball_pos.x -= 0.002; 
-                    }
-                    else if (rot.z < 0) 
+                    if (board[i][j] == 'x')
                     {
-                        if (board[getBoardIndex(ball_pos.z)][getBoardIndex(ball_pos.x, 0.002, 1)] != 'x')
-                            ball_pos.x += 0.002;  
-                    }
-                    if (rot.x > 0) 
-                    { 
-                        if (board[getBoardIndex(ball_pos.z, 0.002, 1)][getBoardIndex(ball_pos.x)] != 'x')
-                            ball_pos.z += 0.002; 
-                    }
-                    else if (rot.x < 0) 
-                    { 
-                        if (board[getBoardIndex(ball_pos.z, -0.002, -1)][getBoardIndex(ball_pos.x)] != 'x')
-                            ball_pos.z -= 0.002;  
-                    }
+                        glColor3f(1.0, 0.0, 0.0);
+                        glBegin(GL_QUADS);
 
-                    GLUquadricObj* qobj = gluNewQuadric();
-                    gluQuadricDrawStyle(qobj, GLU_FILL);
-                    gluQuadricNormals(qobj, GLU_SMOOTH);
+                        /*glVertex3f(x, 0.01, z);
+                        glVertex3f(x + 0.25, 0.01, z);
+                        glVertex3f(x + 0.25, 0.01, z + 0.25);
+                        glVertex3f(x, 0.01, z + 0.25);*/
 
-                    glPushMatrix();
-                    glColor3f(1.0f, 0.0f, 0.0f);
-                    glTranslatef(ball_pos.x, ball_pos.y, ball_pos.z);
-                    gluSphere(qobj, ball_r, 15, 10);
-                    glPopMatrix();
+                        glVertex3f(x, 0.25, z);
+                        glVertex3f(x + 0.25, 0.25, z);
+                        glVertex3f(x + 0.25, 0.25, z + 0.25);
+                        glVertex3f(x, 0.25, z + 0.25);
+
+                        glColor3f(0.0, 1.0, 0.0);
+
+                        glVertex3f(x, 0.01, z);
+                        glVertex3f(x + 0.25, 0.01, z);
+                        glVertex3f(x + 0.25, 0.25, z);
+                        glVertex3f(x, 0.25, z);
+
+                        glVertex3f(x + 0.25, 0.01, z);
+                        glVertex3f(x + 0.25, 0.01, z + 0.25);
+                        glVertex3f(x + 0.25, 0.25, z + 0.25);
+                        glVertex3f(x + 0.25, 0.25, z);
+
+                        glVertex3f(x + 0.25, 0.01, z + 0.25);
+                        glVertex3f(x, 0.01, z + 0.25);
+                        glVertex3f(x, 0.25, z + 0.25);
+                        glVertex3f(x + 0.25, 0.25, z + 0.25);
+
+                        glVertex3f(x, 0.01, z + 0.25);
+                        glVertex3f(x, 0.01, z);
+                        glVertex3f(x, 0.25, z);
+                        glVertex3f(x, 0.25, z + 0.25);
+
+                        glEnd();
+                    }
+                    else if (board[i][j] == 'o')
+                    {
+                        //std::cout << rot.x << " " << rot.z << std::endl;
+                        //std::cout << (ball_pos.x - 0.002 - ball_r + 1) * 4 << std::endl;//8
+                        double delta_x = 0.03 * std::sin(std::abs(rot.z * 3.14 / 180));
+                        double delta_z = 0.03 * std::sin(std::abs(rot.x * 3.14 / 180));
+                        //std::cout << delta_x << " " << delta_z << " " << std::sin(std::abs(rot.z * 3.14 / 180)) << std::endl;
+                        if (rot.z > 0)
+                        {
+                            if (board[getBoardIndex(ball_pos.z)][getBoardIndex(ball_pos.x, -delta_x, -1)] != 'x')
+                                ball_pos.x -= delta_x; // 0.002;
+                        }
+                        else if (rot.z < 0)
+                        {
+                            if (board[getBoardIndex(ball_pos.z)][getBoardIndex(ball_pos.x, delta_x, 1)] != 'x')
+                                ball_pos.x += delta_x;
+                        }
+                        if (rot.x > 0)
+                        {
+                            if (board[getBoardIndex(ball_pos.z, delta_z, 1)][getBoardIndex(ball_pos.x)] != 'x')
+                                ball_pos.z += delta_z;
+                        }
+                        else if (rot.x < 0)
+                        {
+                            if (board[getBoardIndex(ball_pos.z, -delta_z, -1)][getBoardIndex(ball_pos.x)] != 'x')
+                                ball_pos.z -= delta_z;
+                        }
+
+                        if (ball_pos.x < -1 || ball_pos.x > 1 || ball_pos.z < -1 || ball_pos.z > 1)
+                        {
+                            game = false;
+                            //running = false;
+                        }
+                        //std::cout << ball_pos.x << " " << ball_pos.z << std::endl;
+
+                        /*const GLfloat PearlAmbient[4] = { 0.25,	0.20725, 0.20725, 0.9 };
+                        const GLfloat PearlDiffuse[4] = { 1, 0.829, 0.829, 0.9 };	
+                        const GLfloat PearlSpecular[4] = { 0.296648, 0.296648, 0.296648, 0.9 };
+                        const GLfloat PearlShininess = 0.088;*/
+
+                        const GLfloat EmeraldAmbient[4] = { 0.021500, 0.174500, 0.021500, 0.9 };
+                        const GLfloat EmeraldDiffuse[4] = { 0.075680, 0.614240, 0.075680, 0.9 };
+                        const GLfloat EmeraldSpecular[4] = { 0.633000, 0.727811, 0.633000, 0.9 };
+                        const GLfloat EmeraldShininess = 76.8;
+
+                        GLUquadricObj* qobj = gluNewQuadric();
+                        gluQuadricDrawStyle(qobj, GLU_FILL);
+                        gluQuadricNormals(qobj, GLU_SMOOTH);
+
+                        glDisable(GL_COLOR_MATERIAL);
+                        glPushMatrix();
+                        glTranslatef(ball_pos.x, ball_pos.y, ball_pos.z);
+                        glMaterialfv(GL_FRONT, GL_AMBIENT, EmeraldAmbient);
+                        glMaterialfv(GL_FRONT, GL_DIFFUSE, EmeraldDiffuse);
+                        glMaterialfv(GL_FRONT, GL_SPECULAR, EmeraldSpecular);
+                        glMaterialfv(GL_FRONT, GL_SHININESS, &EmeraldShininess);
+                        glColor3f(1.0f, 0.0f, 0.0f);
+                        gluSphere(qobj, ball_r, 15, 10);
+                        glPopMatrix();
+                        glEnable(GL_COLOR_MATERIAL);
+
+                        //std::cout << x << " " << z << std::endl;
+                    }
 
                     //std::cout << x << " " << z << std::endl;
-                }
 
-                //std::cout << x << " " << z << std::endl;
-
-                x += 0.25;
-                if (x == 1)
-                {
-                    x = -1;
-                    z += 0.25;
+                    x += 0.25;
+                    if (x == 1)
+                    {
+                        x = -1;
+                        z += 0.25;
+                    }
                 }
             }
+        
+
+            /*ImGui::Begin("Camera");
+            ImGui::SliderFloat("R", &R, 0.5f, 10.0f);
+            ImGui::SliderAngle("theta", &theta, 0, 360);
+            ImGui::SliderAngle("phi", &phi, 0, 180);
+            if (ImGui::Checkbox("Perspective projection", &perspective_projection)) reshapeScreen(window.getSize());
+            if (ImGui::SliderFloat("FoV", &fov, 10.0f, 90.0f)) reshapeScreen(window.getSize());
+            ImGui::End();*/
+
+            ImGui::Begin("Transformations");
+            ImGui::SliderFloat3("Rotation", *rot_offsets, -15.0f, 15.0f);
+            ImGui::End();
+            //std::cout << *rot_offsets[0] << " " << *rot_offsets[2] << std::endl;
+
+            if (sfk::isKeyPressed(sfk::A))
+            {
+                rot.z += 0.5; //rot.z itd
+            }
+            else if (sfk::isKeyPressed(sfk::D))
+            {
+                rot.z -= 0.5;
+            }
+            else if (sfk::isKeyPressed(sfk::W))
+            {
+                rot.x -= 0.5;
+            }
+            else if (sfk::isKeyPressed(sfk::S))
+            {
+                rot.x += 0.5;
+            }
         }
-
-        /*if (sfk::isKeyPressed(sfk::S))
+        else
         {
-            BYTE* pixels = new BYTE[3 * 800 * 600];
-
-            glReadPixels(0, 0, 800, 600, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
-            sf::Texture texture;
-            texture.create(window.getSize().x, window.getSize().y);
-            texture.update(pixels);
-            texture.copyToImage().saveToFile("screen.jpg");
-        }*/
-
-
-        ImGui::Begin("Camera");
-        ImGui::SliderFloat("R", &R, 0.5f, 10.0f);
-        ImGui::SliderAngle("theta", &theta, 0, 360);
-        ImGui::SliderAngle("phi", &phi, 0, 180);
-        if (ImGui::Checkbox("Perspective projection", &perspective_projection)) reshapeScreen(window.getSize());
-        if (ImGui::SliderFloat("FoV", &fov, 10.0f, 90.0f)) reshapeScreen(window.getSize());
+        ImGui::Begin("Wow!");
+        ImGui::Text("You won!");
+        ImGui::Text("Project by Olga Kubiszyn");
         ImGui::End();
+        }
+        
 
-        ImGui::Begin("Transformations");
-        ImGui::SliderFloat3("Position", *pos_offsets, -3.0f, 3.0f);
-        ImGui::SliderFloat3("Scale", *scale_offsets, -2.0f, 2.0f);
-        ImGui::SliderFloat3("Rotation", *rot_offsets, -15.0f, 15.0f);
-        ImGui::End();
-
-        ImGui::Begin("Light");
+        /*ImGui::Begin("Light");
         ImGui::SliderFloat("R", &RLight, 0.5f, 10.0f);
         ImGui::SliderAngle("theta", &thetaLight, 0, 360);
         ImGui::SliderAngle("phi", &phiLight, 0, 180);
-        ImGui::End();
+        ImGui::End();*/
 
         ImGui::SFML::Render(window);
         window.display();
