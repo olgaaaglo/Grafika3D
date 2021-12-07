@@ -22,8 +22,6 @@ bool game = true;
 sf::Vector3f ball_pos(0.5 + 0.125, 0.125, 0.5 + 0.125);
 double ball_r = 0.08;
 
-//std::vector<std::vector<char>> board;
-
 std::vector<std::vector<char>> board = {
     { 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x'},
     { 'x', ' ', ' ', ' ', 'x', 'x', ' ', 'x'},
@@ -133,7 +131,6 @@ int getBoardIndex(double pos, int sign = 1, double delta = 0)
 
 void moveBall()
 {
-    //std::cout << ball_pos.x << " " << ball_pos.z << std::endl;
     double delta_x = 0.03 * std::sin(std::abs(rot.z * 3.14 / 180));
     double delta_z = 0.03 * std::sin(std::abs(rot.x * 3.14 / 180));
 
@@ -223,7 +220,6 @@ int main()
 
             if (ImGui::Button("Board1"))
             {
-                //board = board;
                 start = false;
             }
             else if (ImGui::Button("Board2"))
@@ -273,8 +269,8 @@ int main()
                 }
             }
 
-            ImGui::Begin("Transformations");
-            ImGui::SliderFloat3("Rotation", *rot_offsets, -15.0f, 15.0f);
+            ImGui::Begin(" ");
+            ImGui::Text("Tilt the board using ASDW keys.");
             ImGui::End();
 
             if (sfk::isKeyPressed(sfk::A))
